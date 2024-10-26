@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-
     public float speed = 7;
     private Rigidbody _rb;
     public float jumpPower;
@@ -13,7 +9,6 @@ public class PlayerController : MonoBehaviour
     private float horizontalInput;
     public bool onGround;
     private GameManager gameManager;
-    
 
     void Start()
     {
@@ -21,20 +16,19 @@ public class PlayerController : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
-
     void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
         if (!gameManager.stopGame)
         {
             transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalInput);
-             if (Input.GetKeyDown(KeyCode.Space) && onGround)
+            if (Input.GetKeyDown(KeyCode.Space) && onGround)
             {
                 _rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
                 onGround = false;
             }
         }
-       
+
 
         if (transform.position.x > xRange)
         {
